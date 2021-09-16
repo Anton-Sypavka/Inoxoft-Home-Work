@@ -1,0 +1,9 @@
+module.exports = {
+    BAD_REQUEST: 400,
+    CREATED: 201,
+    CONFLICT: 409,
+    NOT_FOUND: 404,
+    UNAUTHORIZED: 401,
+    NO_CONTENT: 204,
+    INTERNAL_SERVER_ERROR: 500
+};
