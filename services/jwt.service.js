@@ -13,7 +13,7 @@ const { UNAUTHORIZED } = require('../configs/errorCodes.enum');
 
 module.exports = {
     generateTokenPair: () => {
-        const accessToken = jwt.sign({}, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+        const accessToken = jwt.sign({}, ACCESS_TOKEN_SECRET, { expiresIn: '60m' });
         const refreshToken = jwt.sign({}, REFRESH_TOKEN_SECRET, { expiresIn: '31d' });
 
         return {
@@ -21,16 +21,6 @@ module.exports = {
             refreshToken
         };
     },
-
-    // verifyToken: (token, tokenType = 'access') => {
-    //     try {
-    //         const secretWord = tokenType === 'access' ? ACCESS_TOKEN_SECRET : REFRESH_TOKEN_SECRET;
-    //
-    //         jwt.verify(token, secretWord);
-    //     } catch (e) {
-    //         throw new ErrorHandler(UNAUTHORIZED, 'Invalid token');
-    //     }
-    // },
 
     generateRecoveryToken: () => jwt.sign({}, RECOVERY_TOKEN_SECRET, { expiresIn: '1d' }),
 

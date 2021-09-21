@@ -6,7 +6,11 @@ const { Product } = require('../models');
 module.exports = {
     getAllProducts: async (req, res, next) => {
         try {
-            const products = await Product.find({});
+            const { query } = req;
+            let queryStr = JSON.stringify(query);
+            queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+            const products = await Product.find(JSON.parse(queryStr));
 
             res
                 .json({
@@ -23,8 +27,8 @@ module.exports = {
 
     createProduct: async (req, res, next) => {
         try {
-            const { loggedUser, body } = req;
-            const newProduct = await Product.create({ ...body, user: loggedUser._id });
+            const { currentUser, body } = req;
+            const newProduct = await Product.create({ ...body, user: currentUser._id });
 
             res
                 .status(CREATED)

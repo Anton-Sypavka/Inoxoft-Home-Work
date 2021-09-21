@@ -22,6 +22,6 @@ const ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: USER
     }
-});
+}, { timestamps: true });
 
 module.exports = model(PRODUCT, ProductSchema);
